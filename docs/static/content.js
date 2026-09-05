@@ -380,7 +380,9 @@ function setupSiteHost() {
       viewer.frame = viewer.right.querySelector('.lyt_frame');
       viewer.load = viewer.right.querySelector('.lyt_load');
       viewer.banner = new host.setupViewerBanner; viewer.banner.init();
-      if (site.inIE) viewer.show(true);
+      console.log("viewer.init", viewer.frame.contentDocument.URL);
+      if (site.inIE || viewer.frame.contentDocument.URL !== 'about:blank')
+        viewer.show(true);
       viewer.onReady(function(frame_win) { // Load the initial URL into the frame.
         if (site.supportsStorage)
           window.sessionStorage.setItem('data', JSON.stringify(cache));
