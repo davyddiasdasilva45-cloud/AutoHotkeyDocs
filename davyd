@@ -1,0 +1,65 @@
+#NoEnv
+#SingleInstance Force
+SendMode Input
+SetBatchLines -1
+
+; ===== CONFIGURAÇÃO DE VELOCIDADE =====
+; Quanto menor o número, mais rápido toca
+DelayEntreNotas := 35          ; velocidade normal das notas
+DelayEntreGrupos := 80         ; pausa entre frases
+
+F8::   ; Aperte F8 para começar a tocar
+{
+    ; Parte 1 - Introdução (spam de u)
+    Loop 40
+    {
+        Send, u
+        Sleep, %DelayEntreNotas%
+    }
+    Sleep, %DelayEntreGrupos%
+
+    ; Parte 2
+    notas1 := "6uuu3uuu6uuu3uuu6uuu3iuy6up3sdddd3dsad6sss3saps7aaa4ia5o3"
+    TocarSequencia(notas1)
+
+    Sleep, %DelayEntreGrupos%
+
+    ; Parte 3
+    notas2 := "6uuu3uuu6uuu3uuu6uiuy3ups6fj3l9zlzkz8lkjl7kjhk6jfs p3gfdsapoa6p"
+    TocarSequencia(notas2)
+
+    Sleep, %DelayEntreGrupos%
+
+    ; Parte 4
+    notas3 := "6uuu3uuu6uuu3uuu6uuu3iuy6up3sdddd3dsad6sss3saps7aaa4ia5o3"
+    TocarSequencia(notas3)
+
+    Sleep, %DelayEntreGrupos%
+
+    ; Parte 5 - Mais rápida e densa
+    notas4 := "6u80u3u80u6u80u3u80u6ui80uy6u80p3s80dd90dd3ds90ad6ss80ss3sa80ps7aaea a4iea0o3"
+    TocarSequencia(notas4)
+
+    Sleep, %DelayEntreGrupos%
+
+    ; Parte final - bem difícil
+    notas5 := "6fugi08fudy3fu08jpls6fx08bj3lm089dzlmsxaeknqzdz8lmsxaknz0bejlp lmsx7aknzbjlp9hkovwaknz6bjlpfjux8eflstejps7cgijfhuxdgyzflst03adkrejpsahowafkr6ejps"
+    TocarSequencia(notas5)
+}
+return
+
+F9::   ; Aperte F9 para parar o script
+ExitApp
+
+; Função que toca a sequência de letras
+TocarSequencia(texto)
+{
+    global DelayEntreNotas
+    Loop, Parse, texto
+    {
+        if (A_LoopField = " ")
+            continue
+        Send, %A_LoopField%
+        Sleep, %DelayEntreNotas%
+    }
+}
